@@ -15,8 +15,6 @@ app.get('/search', (req, res) => {
 app.post('/search', (req, res) => {
     let userMovieTitle = req.body.movieTitle;
 
-    console.log(userMovieTitle);
-
     let movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=4ca94f8b470d7e34bd3f59c3914295c8&query=${userMovieTitle}`;
     let genresUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=4ca94f8b470d7e34bd3f59c3914295c8&language=en-US';
 
@@ -28,9 +26,9 @@ app.post('/search', (req, res) => {
         let movieGenreIds = movieRaw.genre_ids;
         let movieGenres = genres.data.genres;
 
-        let movieGenresArray =[];
+        let movieGenresArray = [];
 
-        for(let i = 0; i < movieGenreIds.length; i++){ // i++ - = i + 1
+        for(let i = 0; i < movieGenreIds.length; i++) { // i++ - = i + 1
             for(let j = 0; j < movieGenres.length; j ++) {
                 if(movieGenreIds[i] === movieGenres[j].id){
                     movieGenresArray.push(movieGenres[j].name);
@@ -41,7 +39,7 @@ app.post('/search', (req, res) => {
 
         let genresToDisplay = '';
         movieGenresArray.forEach(genre => {
-            genresToDisplay = genresToDisplay + `${genre}, `;
+            genresToDisplay = genresToDisplay+ `${genre}, `;
         });
 
         
@@ -64,7 +62,7 @@ app.post('/search', (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-    console.log('Server is running.')
+    console.log('Server is running.');
 });
 
 
